@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Siblings Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-flex">
+            <div class="logo" onclick="showView('home')">
+                <div class="logo-box"><i data-lucide="shopping-cart"></i></div>
+                <span>Six Siblings<span>Store</span></span>
+            </div>
+            <div class="search-bar">
+                <i data-lucide="search" size="18"></i>
+                <input type="text" placeholder="Search for premium products...">
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">หน้าเเรก</a>
+                <a href="products.html">สินค้าทั้งหมด</a>
+                <a href="customer.html"><i data-lucide="message-square" size="18"></i> บริการลูกค้า</a>
+                <a href="login.html" class="login-link">เข้าสู่ระบบ</a>
+                <a href="signup.html" class="btn-signup-nav">สมัครสมาชิก</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home-view" class="container">
+        <section class="hero-card">
+            <div class="hero-content">
+                <h1>ขอต้อนรับเข้าสู่ <span>หกพี่น้อง</span></h1>
+                <p>เว็บไซต์นี้ถูกสร้างขึ้นเพื่อเป็น ต้นแบบร้านค้าออนไลน์สำหรับอุปกรณ์การเรียน เพื่ออำนวยความสะดวกให้กับนักเรียนและนักศึกษาที่ไม่สะดวกเดินทางไปซื้อด้วยตัวเอง</p>
+                <button class="btn-shop">เลือกซื้อเลย!!</button>
+            </div>
+        </section>
+
+        <div class="section-title"><span class="purple-bar"></span>เลือกซื้อตามหมวดหมู่</div>
+        <div class="cat-grid">
+            <div class="cat-item"><div class="cat-img" style="background-image: url('https://th.bing.com/th?q=Best+Ball+Pen&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=TH&setlang=en&adlt=strict&t=1&mw=247')"></div><span>Pens</span></div>
+            <div class="cat-item"><div class="cat-img" style="background-image: url('data:image/webp;base64,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')"></div><span>Notebooks</span></div>
+            <div class="cat-item"><div class="cat-img" style="background-image: url('https://th.bing.com/th?q=Accounting+Calculator&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=TH&setlang=en&adlt=strict&t=1&mw=247')"></div><span>Calculators</span></div>
+            <div class="cat-item"><div class="cat-img" style="background-image: url('https://th.bing.com/th?q=White+Desktop&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=TH&setlang=en&adlt=strict&t=1&mw=247')"></div><span>Desktop</span></div>
+            <div class="cat-item"><div class="cat-img" style="background-image: url('https://th.bing.com/th?q=Colored+Sheets+of+Paper&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=TH&setlang=en&adlt=strict&t=1&mw=247')"></div><span>Paper</span></div>
+        </div>
+
+        <div class="section-title flex-between">
+            <div><span class="purple-bar"></span>ลดราคาพิเศษ</div>
+            <a href="about.html" class="view-all">ดูทั้งหมด ></a>
+        </div>
+        <div class="product-grid">
+            <div class="prod-card">
+                <div class="prod-img" style="background-image: url('https://ae01.alicdn.com/kf/S918b48d5396b421d9b0f3ec1d6b36171Y.jpg')"></div>
+                <div class="prod-info">
+                    <span class="p-tag">PENS</span>
+                    <h3>ปากกาดำ ลูกลื่น  หมึกสีดำ 0.5mm.แพค 12/50ด้าม/กระปุก</h3>
+                    <p class="p-price">฿82 - ฿215</p>
+                    <button class="btn-add"><i data-lucide="shopping-cart" size="14"></i>หยิบใส่ตะกร้า</button>
+                </div>
+            </div>
+            </div>
+
+        <div class="promo-grid">
+            <div class="promo-card bg-blue">
+                <span class="badge">สินค้ามาใหม่</span>
+                <h3>ปากกาหมึกเจลแบบกด ขนาด 0.5/0.38 มม.</h3>
+                <button class="btn-white">กำลังลด 10%</button>
+            </div>
+            <div class="promo-card bg-purple">
+                <span class="badge">ต้อนรับฤดูร้อน</span>
+                <h3>ลดหนักถึง 20%</h3>
+                <button class="btn-white">ซื้อเลย</button>
+            </div>
+        </div>
+    </main>
+
+    <section id="auth-view" class="auth-container" style="display:none;">
+        <div id="login-card" class="auth-card">
+            <div class="auth-icon"><i data-lucide="shopping-cart"></i></div>
+            <h2>ยินดีต้อนรับกลับมา</h2>
+            <p class="subtitle">ป้อนข้อมูลประจำตัวของคุณเพื่อเข้าสู่ระบบ</p>
+            <div class="form-group">
+                <label>อีเมล</label>
+                <input type="email" placeholder="อีเมลของคุณ">
+            </div>
+            <div class="form-group">
+                <div class="flex-between"><label>รหัสผ่าน</label><a href="#" class="forgot">ลืมรหัสผ่าน?</a></div>
+                <input type="password">
+            </div>
+            <button class="btn-auth-primary">เข้าสู่ระบบ</button>
+            <p class="auth-footer">ยังไม่มีบัญชี? <a onclick="showAuth('signup')">สมัครสมาชิก</a></p>
+            <p class="auth-footer"><a onclick="showView('home')">← กลับสู่หน้าหลัก</a></p>
+        </div>
+
+        <div id="signup-card" class="auth-card" style="display:none;">
+            <div class="auth-icon"><i data-lucide="shopping-cart"></i></div>
+            <h2>สร้างบัญชีใหม่</h2>
+            <p class="subtitle">สร้างบัญชีเพื่อเข้าถึงสิทธิพิเศษของสมาชิก</p>
+            <div class="form-row">
+                <div class="form-group"><label>ชื่อ</label><input type="text"></div>
+                <div class="form-group"><label>นามสกุล</label><input type="text"></div>
+            </div>
+            <div class="form-group"><label>อีเมล</label><input type="email"></div>
+            <div class="form-group"><label>รหัสผ่าน</label><input type="password"></div>
+            <button class="btn-auth-primary">สมัครสมาชิก</button>
+            <p class="auth-footer">มีบัญชีอยู่แล้ว? <a onclick="showAuth('login')">เข้าสู่ระบบ</a></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>About Six Siblings Store</h4>
+                <a href="#">เรื่องราวของเรา</a><a href="#">นโยบายความเป็นส่วนตัว</a>
+            </div>
+            <div class="footer-col">
+                <h4>บริการลูกค้า</h4>
+                <a href="#">ศูนย์ช่วยเหลือ</a><a href="#">การจัดส่งและการคืนสินค้า</a>
+            </div>
+            <div class="footer-col">
+                <h4>การชำระเงิน</h4>
+                <div class="gray-flex"><div class="box"></div><div class="box"></div><div class="box"></div></div>
+            </div>
+            <div class="footer-col">
+                <h4>ติดตามเรา</h4>
+                <div class="gray-flex"><div class="circle"></div><div class="circle"></div><div class="circle"></div></div>
+            </div>
+        </div>
+        <p class="copyright">© 2026 Six Siblings Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

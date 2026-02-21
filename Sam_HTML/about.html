@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Siblings Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-purple: #D8B4FE; /* สีม่วงหลักตามภาพ */
+            --dark-purple: #8B5CF6;
+            --bg-light: #F9FAFB;
+            --text-gray: #9CA3AF;
+            --border-color: #E5E7EB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: #1F2937;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 8%;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 22px;
+            color: #4B2A85;
+        }
+
+        .logo-icon {
+            background: #E9D5FF;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .search-bar {
+            flex-grow: 0.5;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 20px 10px 45px;
+            border-radius: 25px;
+            border: 1px solid #F3F4F6;
+            background: #F3F4F6;
+            font-size: 14px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4B5563;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .signup-btn {
+            background: var(--primary-purple);
+            padding: 8px 24px;
+            border-radius: 10px;
+            color: #581C87 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb span { cursor: pointer; }
+        .breadcrumb .active { color: var(--primary-purple); font-weight: 500; }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        /* Sidebar Filter */
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            height: fit-content;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-header h3 { font-size: 18px; display: flex; align-items: center; gap: 10px; }
+        .clear-all { font-size: 13px; color: var(--text-gray); cursor: pointer; text-decoration: underline; }
+
+        .filter-section h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #6B7280;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-section ul { list-style: none; margin-bottom: 35px; }
+        .filter-section li { 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 14px;
+            color: #4B5563;
+            cursor: pointer;
+        }
+
+        .filter-section li input[type="radio"] { accent-color: var(--dark-purple); width: 16px; height: 16px; }
+        .li-active { color: var(--dark-purple); font-weight: 600; }
+
+        .price-range { margin-top: 10px; }
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 5px;
+            appearance: none;
+            accent-color: var(--primary-purple);
+        }
+
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--primary-purple);
+        }
+
+        /* Product Content Area */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .content-header h2 { font-size: 24px; font-weight: 700; }
+        .item-count { font-weight: 400; color: #9CA3AF; font-size: 16px; }
+
+        .sort-by { font-size: 14px; color: #374151; }
+        .sort-by select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-left: 10px;
+            outline: none;
+        }
+
+        .applied-tag {
+            background: #F3E8FF;
+            color: #7E22CE;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-info { padding: 20px; }
+        .cat-label { font-size: 11px; font-weight: 600; color: #9CA3AF; margin-bottom: 8px; text-transform: uppercase; }
+        .card-info h3 { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 10px; }
+        .price { font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 20px; }
+
+        .add-cart-btn {
+            width: 100%;
+            background: var(--primary-purple);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            color: #581C87;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .add-cart-btn:hover { background: #C084FC; }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .page-num {
+            width: 35px;
+            height: 35px;
+            border: 1px solid var(--primary-purple);
+            background: #FAF5FF;
+            color: #7E22CE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .search-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon">🛒</div>
+            <span>Six Siblings Store</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for premium products...">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">หน้าเเรก</a>
+            <a href="products.html">สินค้าทั้งหมด</a>
+            <a href="customer.html">💬 บริการลูกค้า</a>
+            <a href="#">🌐 EN</a>
+            <a href="#" style="font-size: 18px;">🛒</a>
+            <a href="login.html">เข้าสู่ระบบ</a>
+            <a href="signup.html" class="signup-btn">สมัครสมาชิก</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            กลับสู่หน้าเเรก &nbsp; > &nbsp; <span>สินค้าทั้งหมด</span> &nbsp; > &nbsp; <span class="active">ปากกา</span>
+        </div>
+
+        <div class="main-layout">
+            <aside class="sidebar">
+                <div class="filter-header">
+                    <h3><span>🔍</span> ตัวกรอง</h3>
+                    <span class="clear-all">ล้างทั้งหมด</span>
+                </div>
+
+                <div class="filter-section">
+                    <h4>หมวดหมู่</h4>
+                    <ul>
+                        <li class="li-active"><input type="radio" checked> ปากกา</li>
+                        <li><input type="radio"> สมุดโน้ต</li>
+                        <li><input type="radio"> กระเป๋า</li>
+                        <li><input type="radio"> เครื่องคิดเลข</li>
+                        <li><input type="radio"> กระดาษ</li>
+                        <li><input type="radio"> เดสก์ท็อป</li>
+                    </ul>
+                </div>
+
+                <div class="filter-section">
+                    <h4>ช่วงราคา</h4>
+                    <input type="range" class="range-slider" min="0" max="200" value="200">
+                    <div class="price-labels">
+                        <span>$0</span>
+                        <span>$200</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="content-header">
+                    <h2>ชุดปากกา <span class="item-count">(3 items)</span></h2>
+                    <div class="sort-by">
+                        จัดเรียงตาม: 
+                        <select>
+                            <option>แนะนำ</option>
+                            <option>ราคา: ต่ำไปสูง</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="applied-tag">
+                    หมวดหมู่: ปากกา ✕
+                </div>
+
+                <div class="product-grid">
+                    <div class="card">
+                        <img src="https://down-th.img.susercontent.com/file/th-11134207-7r98y-ln441jh4four6e@resize_w450_nl.webp" alt="Luxury Pen">
+                        <div class="card-info">
+                            <p class="cat-label">ปากกา</p>
+                            <h3>ปากกาลูกลื่น ปากกา รุ่น Skate 111 และ 111S ขนาดหัว 0.5 มม. หมึกน้ำเงิน / แดง</h3>
+                            <p class="price">$120.00</p>
+                            <button class="add-cart-btn">🛒 เพิ่มไปยังรถเข็น</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://down-th.img.susercontent.com/file/c4a0c45162708ddeec9e3cf10c35d78a.webp" alt="Minimalist Pen">
+                        <div class="card-info">
+                            <p class="cat-label">ปากกา</p>
+                            <h3>ปากกาลูกลื่น รุ่น 111S ขนาดหัว 0.5 มม. หมึกสีแดง</h3>
+                            <p class="price">$15.00</p>
+                            <button class="add-cart-btn">🛒 เพิ่มไปยังรถเข็น</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://down-th.img.susercontent.com/file/th-11134207-7r98z-m0cr07emqcoq9c.webp" alt="Gel Pen Set">
+                        <div class="card-info">
+                            <p class="cat-label">ปากกา</p>
+                            <h3>ปากกาเจล มี3สี 0.5mm หัวปกติ/หัวเข็ม Classic 0.5 มม.(สีน้ำเงิน/แดง/ดำ) ปากกาหมึกเจล</h3>
+                            <p class="price">$18.50</p>
+                            <button class="add-cart-btn">🛒 เพิ่มไปยังรถเข็น</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <div class="page-num">1</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
